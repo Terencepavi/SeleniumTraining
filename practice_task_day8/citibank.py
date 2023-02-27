@@ -28,7 +28,12 @@ month.select_by_visible_text("Apr")
 driver.find_element(By.XPATH,("//a[contains(text(),'14')]")).click()
 time.sleep(2)
 # driver.execute_script("arguments[0].click();", driver.find_element(By.XPATH('//input[@value="PROCEED"]'
-driver.execute_script("arguments[0].scrollintoView();",driver.find_element(By.XPATH('//input[@value="PROCEED"]')))
-driver.find_element(By.XPATH(//div[3]/div[12]/div[1]/input[1])).click()
-errormsg=driver.find_element(By.XPATH,("//body/div[2]/div[2]/li[4]")).text
-print(errormsg)
+# footer=driver.find_element(By.XPATH("div[class='footerLogo']"))
+# driver.execute_script("arguments[0].scrollintoView();",footer)
+driver.execute_script("window.scrollBy(0,1000)","")
+time.sleep(5)
+driver.find_element(By.XPATH,("//div[3]/div[12]/div[1]/input[1]")).click()
+# time.sleep(2)
+# driver.switch_to.alert.accept()
+# errormsg=driver.find_element(By.XPATH,("//body[1]/div[8]/div[2]/li[2]]")).text
+# print(errormsg)
