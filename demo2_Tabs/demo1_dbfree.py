@@ -19,4 +19,13 @@ driver.find_element(By.ID,"input_password").send_keys("welcome@123")
 driver.find_element(By.ID,"input_go").click()
 driver.switch_to.window(Windows[0])
 
+for window in Windows:
+    print(window)
+    driver.switch_to.window(window)
+    print(driver.title)
+    if "phpMy" in driver.title:
+        break
+    print("-----------------")
+
+
 time.sleep(10)
