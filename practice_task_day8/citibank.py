@@ -2,6 +2,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as Ec
 
 driver = webdriver.Chrome()
 driver.get('https://www.online.citibank.co.in/')
@@ -35,5 +37,9 @@ time.sleep(5)
 driver.find_element(By.XPATH,("//div[3]/div[12]/div[1]/input[1]")).click()
 # time.sleep(2)
 # driver.switch_to.alert.accept()
-# errormsg=driver.find_element(By.XPATH,("//body[1]/div[8]/div[2]/li[2]]")).text
+wait=WebDriverWait(driver,20)
+errortab=wait.until(Ec.presence_of_element_located((By.XPATH,("//li[contains(text(),'• Please accept Terms and Conditions')]"))))
+errormsg=errortab.text
+print("Error message:",errormsg)
+
 # print(errormsg)
