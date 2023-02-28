@@ -23,20 +23,23 @@ driver.find_element(By.XPATH,("//a[contains(text(),'Credit Card')]")).click()
 driver.find_element(By.XPATH,('//input[@class="numberField debit-num"]')).send_keys("4545565688879998")
 driver.find_element(By.XPATH,("//input[@id='cvvnumber']")).send_keys("123")
 driver.find_element(By.XPATH,("//input[@id='bill-date-long']")).click()
+#approach 2 with select class
 year=Select(driver.find_element(By.XPATH,('//select[@data-handler="selectYear"]')))
 year.select_by_visible_text("2022")
 month=Select(driver.find_element(By.XPATH,('//select[@data-handler="selectMonth"]')))
 month.select_by_visible_text("Apr")
 driver.find_element(By.XPATH,("//a[contains(text(),'14')]")).click()
-time.sleep(2)
-# driver.execute_script("arguments[0].click();", driver.find_element(By.XPATH('//input[@value="PROCEED"]'
-# footer=driver.find_element(By.XPATH("div[class='footerLogo']"))
-# driver.execute_script("arguments[0].scrollintoView();",footer)
-driver.execute_script("window.scrollBy(0,1000)","")
-time.sleep(5)
-driver.find_element(By.XPATH,("//div[3]/div[12]/div[1]/input[1]")).click()
+#approach 3 - javascript query selector
+# driver.execute_script("document.querySelector('#bill-date-long').value='17/05/1997'")
 # time.sleep(2)
-# driver.switch_to.alert.accept()
+# driver.execute_script("arguments[0].scrollintoView();",footer)
+#approach 4 - javascript without query selector
+ele=driver.find_element(By.XPATH,'//input[@name="DOB"]')
+driver.execute_script("arguments[0].value='17/05/1997'",ele)
+driver.execute_script("window.scrollBy(0,1000)","")
+
+
+driver.find_element(By.XPATH,("//div[3]/div[12]/div[1]/input[1]")).click()
 wait=WebDriverWait(driver,20)
 errortab=wait.until(Ec.presence_of_element_located((By.XPATH,("//li[contains(text(),'• Please accept Terms and Conditions')]"))))
 errormsg=errortab.text
