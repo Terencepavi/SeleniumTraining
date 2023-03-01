@@ -1,10 +1,15 @@
 import time
+from datetime import date
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as Ec
 
+today = date.today()
+print("Today's date:", today)
+d1 = today.strftime("%Y-%m-%d")
+print("d1 =", d1)
 driver = webdriver.Chrome()
 driver.get('http://demo.openemr.io/b/openemr/')
 driver.maximize_window()
@@ -25,7 +30,7 @@ title.select_by_visible_text("Mr.")
 driver.find_element(By.XPATH,("//input[@id='form_fname']"))
 driver.find_element(By.XPATH,("//input[@id='form_fname']")).send_keys("Jack")
 driver.find_element(By.XPATH,("//input[@id='form_lname']")).send_keys("Sparrow")
-driver.find_element(By.CSS_SELECTOR,"#form_DOB").send_keys("2023-03-01")
+driver.find_element(By.CSS_SELECTOR,"#form_DOB").send_keys(d1)
 sex=Select(driver.find_element(By.CSS_SELECTOR,"#form_sex"))
 sex.select_by_visible_text("Male")
 driver.find_element(By.CSS_SELECTOR,"#create").click()
@@ -37,7 +42,11 @@ alert=wait.until(Ec.alert_is_present())
 alertmsg=alert.text
 print("Alerttext:",alertmsg)
 alert.accept()
-driver.find_element(By.XPATH,"(//div[@class='closeDlgIframe'])[1]").click()
+popup=driver.find_element(By.XPATH, "(//div[@class='closeDlgIframe'])[1]").is_displayed()
+print(popup)
+if popup==True:
+    driver.find_element(By.XPATH, "(//div[@class='closeDlgIframe'])[1]").click()
+# driver.find_element(By.XPATH,"(//div[@class='closeDlgIframe'])[1]").click()
 Patient_name=driver.find_element(By.XPATH,"(//span[@data-bind='text: pname()'])[1]")
 Patient_name.click()
 print("Patient name is:",Patient_name.text)

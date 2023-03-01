@@ -7,6 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as Ec
 
 driver = webdriver.Chrome()
+driver.implicitly_wait(20)
 driver.get('https://www.royalcaribbean.com')
 driver.maximize_window()
 driver.find_element(By.XPATH,'(//span[text()="Sign In"])[1]').click()
@@ -14,4 +15,6 @@ wait=WebDriverWait(driver,20)
 action=webdriver.ActionChains(driver)
 time.sleep(10)
 # action.scroll_to_element(driver.find_element(By.XPATH,'//a[text()="Create an account"]'))
-driver.find_element(By.LINK_TEXT,'Create an account').click()
+# driver.find_element(By.LINK_TEXT,'Create an account').click()
+driver.execute_script("document.querySelector('.login__create-account.login__create-account--royal')").click()
+time.sleep(10)
